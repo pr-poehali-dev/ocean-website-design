@@ -1,282 +1,310 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Icon from "@/components/ui/icon";
 
 const Index = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0A0F1C] via-[#1A1F2C] to-[#0A0F1C]">
-      <header className="fixed top-0 w-full z-50 bg-[#0A0F1C]/80 backdrop-blur-md border-b border-white/10">
-        <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#0EA5E9] to-[#0284C7] flex items-center justify-center">
-              <Icon name="Shield" size={24} className="text-white" />
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      <header
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+          scrolled ? "bg-black/90 backdrop-blur-xl border-b border-white/10" : "bg-transparent"
+        }`}
+      >
+        <nav className="container mx-auto px-6 py-5 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0A84FF] to-[#0066CC] flex items-center justify-center shadow-lg shadow-[#0A84FF]/30">
+              <Icon name="MonitorDot" size={22} className="text-white" />
             </div>
-            <span className="text-2xl font-bold text-white">Ocean</span>
+            <span className="text-2xl font-bold tracking-tight">Nexus</span>
           </div>
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#home" className="text-white/80 hover:text-white transition-colors">Home</a>
-            <a href="#features" className="text-white/80 hover:text-white transition-colors">Features</a>
-            <a href="#faq" className="text-white/80 hover:text-white transition-colors">FAQs</a>
-            <a href="#contact" className="text-white/80 hover:text-white transition-colors">Contact</a>
+          <div className="hidden md:flex items-center gap-10">
+            <a href="#features" className="text-sm text-white/70 hover:text-white transition-colors">Features</a>
+            <a href="#security" className="text-sm text-white/70 hover:text-white transition-colors">Security</a>
+            <a href="#how" className="text-sm text-white/70 hover:text-white transition-colors">How It Works</a>
+            <a href="#pricing" className="text-sm text-white/70 hover:text-white transition-colors">Pricing</a>
+            <a href="#login" className="text-sm text-white/70 hover:text-white transition-colors">Login</a>
           </div>
-          <Button className="bg-[#0EA5E9] hover:bg-[#0284C7] text-white">
-            Download
+          <Button className="bg-[#0A84FF] hover:bg-[#0066CC] text-white shadow-lg shadow-[#0A84FF]/30">
+            Get Started
           </Button>
         </nav>
       </header>
 
-      <main className="pt-24">
-        <section id="home" className="container mx-auto px-6 py-20 md:py-32">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8 animate-fade-in">
-              <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
-                Stop Cheaters.<br />
-                <span className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] bg-clip-text text-transparent">
-                  Protect Your Game.
-                </span>
-              </h1>
-              <p className="text-xl text-white/70 leading-relaxed">
-                Ocean is the cutting-edge anti-cheat solution that detects and prevents all types of cheating in real-time. Built for speed, security, and reliability.
-              </p>
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-[#0EA5E9] to-[#0284C7] hover:from-[#0284C7] hover:to-[#0369A1] text-white text-lg px-8 py-6 animate-glow"
-              >
-                Start Detecting Cheaters
-                <Icon name="ArrowRight" size={20} className="ml-2" />
-              </Button>
-              <div className="flex gap-8 pt-4">
-                <div className="space-y-1">
-                  <div className="text-3xl font-bold text-white">99.9%</div>
-                  <div className="text-sm text-white/60">Detection Rate</div>
-                </div>
-                <div className="space-y-1">
-                  <div className="text-3xl font-bold text-white">&lt;5ms</div>
-                  <div className="text-sm text-white/60">Response Time</div>
-                </div>
-                <div className="space-y-1">
-                  <div className="text-3xl font-bold text-white">24/7</div>
-                  <div className="text-sm text-white/60">Protection</div>
-                </div>
-              </div>
-            </div>
-            <div className="relative animate-fade-in">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0EA5E9]/20 to-[#0284C7]/20 blur-3xl"></div>
-              <img 
-                src="https://cdn.poehali.dev/projects/ee1051d3-7def-4477-ac4f-f6b174d4bafd/files/c1ea35e0-edc5-4d51-a59b-bf770101b9c7.jpg" 
-                alt="Ocean Anti-Cheat Dashboard"
-                className="relative rounded-2xl border border-white/10 shadow-2xl"
-              />
-            </div>
-          </div>
-        </section>
+      <section
+        className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden"
+        style={{
+          backgroundImage: `url('https://cdn.poehali.dev/projects/ee1051d3-7def-4477-ac4f-f6b174d4bafd/files/299ece07-cbc2-4487-b7e2-46e4cac6648b.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A84FF]/10 via-transparent to-transparent"></div>
+        
+        <div className="relative container mx-auto text-center space-y-8 animate-fade-in">
+          <h1 className="text-6xl md:text-8xl font-bold tracking-tight leading-tight">
+            Most Powerful<br />
+            <span className="bg-gradient-to-r from-[#0A84FF] to-[#0066FF] bg-clip-text text-transparent">
+              Remote Control Tool
+            </span>
+          </h1>
+          <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+            Мгновенный доступ, кристальное качество, абсолютная безопасность — всё в одном клике.
+          </p>
+          <Button
+            size="lg"
+            className="bg-gradient-to-r from-[#0A84FF] to-[#0066CC] hover:from-[#0066CC] hover:to-[#0052A3] text-white text-lg px-10 py-7 shadow-2xl shadow-[#0A84FF]/50 animate-glow mt-8"
+          >
+            Start Free Trial
+            <Icon name="ArrowRight" size={22} className="ml-2" />
+          </Button>
+        </div>
 
-        <section id="features" className="container mx-auto px-6 py-20">
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-white">
-              Powerful Features
-            </h2>
-            <p className="text-xl text-white/60">
-              Everything you need to keep your game secure
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+          <Icon name="ChevronDown" size={32} className="text-white/50" />
+        </div>
+      </section>
+
+      <section id="features" className="py-32 px-6 bg-gradient-to-b from-black via-[#0A0A0A] to-black">
+        <div className="container mx-auto">
+          <div className="text-center mb-20 space-y-4 animate-fade-in">
+            <h2 className="text-5xl md:text-6xl font-bold">See Why</h2>
+            <p className="text-xl text-white/60 max-w-2xl mx-auto">
+              Nexus объединяет скорость, качество и безопасность в одном решении
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-white/5 backdrop-blur border-white/10 p-8 space-y-4 hover:bg-white/10 transition-all animate-slide-in">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#0284C7] flex items-center justify-center">
-                <Icon name="Search" size={28} className="text-white" />
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur border-white/10 p-10 space-y-6 hover:bg-white/10 hover:border-[#0A84FF]/50 transition-all group animate-slide-in">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0A84FF] to-[#0066CC] flex items-center justify-center shadow-xl shadow-[#0A84FF]/30 group-hover:scale-110 transition-transform">
+                <Icon name="Zap" size={32} className="text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white">Detect All Cheats</h3>
-              <p className="text-white/70">
-                Advanced scanning technology identifies every type of cheat in any game, from aimbots to wallhacks.
+              <h3 className="text-2xl font-bold">Speed</h3>
+              <p className="text-white/70 leading-relaxed">
+                Мгновенное подключение без задержек. Скорость отклика менее 10ms для максимальной производительности.
               </p>
             </Card>
 
-            <Card className="bg-white/5 backdrop-blur border-white/10 p-8 space-y-4 hover:bg-white/10 transition-all animate-slide-in" style={{animationDelay: '0.1s'}}>
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#0284C7] flex items-center justify-center">
-                <Icon name="Users" size={28} className="text-white" />
+            <Card className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur border-white/10 p-10 space-y-6 hover:bg-white/10 hover:border-[#0A84FF]/50 transition-all group animate-slide-in" style={{animationDelay: '0.1s'}}>
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0A84FF] to-[#0066CC] flex items-center justify-center shadow-xl shadow-[#0A84FF]/30 group-hover:scale-110 transition-transform">
+                <Icon name="Sparkles" size={32} className="text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white">Protect Community</h3>
-              <p className="text-white/70">
-                Create a fair gaming environment and build trust with your player base through reliable protection.
+              <h3 className="text-2xl font-bold">Quality</h3>
+              <p className="text-white/70 leading-relaxed">
+                4K-поток с адаптивным сжатием. Кристально чистая картинка при любом качестве соединения.
               </p>
             </Card>
 
-            <Card className="bg-white/5 backdrop-blur border-white/10 p-8 space-y-4 hover:bg-white/10 transition-all animate-slide-in" style={{animationDelay: '0.2s'}}>
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#0284C7] flex items-center justify-center">
-                <Icon name="Zap" size={28} className="text-white" />
+            <Card className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur border-white/10 p-10 space-y-6 hover:bg-white/10 hover:border-[#0A84FF]/50 transition-all group animate-slide-in" style={{animationDelay: '0.2s'}}>
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0A84FF] to-[#0066CC] flex items-center justify-center shadow-xl shadow-[#0A84FF]/30 group-hover:scale-110 transition-transform">
+                <Icon name="ShieldCheck" size={32} className="text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white">Boost Performance</h3>
-              <p className="text-white/70">
-                Lightweight design ensures zero impact on game performance while maintaining maximum protection.
+              <h3 className="text-2xl font-bold">Security</h3>
+              <p className="text-white/70 leading-relaxed">
+                End-to-end шифрование и защита от перехвата. Ваши данные под надёжной защитой военного уровня.
               </p>
             </Card>
 
-            <Card className="bg-white/5 backdrop-blur border-white/10 p-8 space-y-4 hover:bg-white/10 transition-all animate-slide-in" style={{animationDelay: '0.3s'}}>
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#0284C7] flex items-center justify-center">
-                <Icon name="Lock" size={28} className="text-white" />
+            <Card className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur border-white/10 p-10 space-y-6 hover:bg-white/10 hover:border-[#0A84FF]/50 transition-all group animate-slide-in" style={{animationDelay: '0.3s'}}>
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0A84FF] to-[#0066CC] flex items-center justify-center shadow-xl shadow-[#0A84FF]/30 group-hover:scale-110 transition-transform">
+                <Icon name="BrainCircuit" size={32} className="text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white">Military-Grade Security</h3>
-              <p className="text-white/70">
-                Bank-level encryption and security protocols protect your game and player data from any threats.
+              <h3 className="text-2xl font-bold">AI Guard</h3>
+              <p className="text-white/70 leading-relaxed">
+                ИИ-детектор аномалий и читов в реальном времени. Умная система обнаруживает подозрительное поведение мгновенно.
               </p>
             </Card>
 
-            <Card className="bg-white/5 backdrop-blur border-white/10 p-8 space-y-4 hover:bg-white/10 transition-all animate-slide-in" style={{animationDelay: '0.4s'}}>
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#0284C7] flex items-center justify-center">
-                <Icon name="Gauge" size={28} className="text-white" />
+            <Card className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur border-white/10 p-10 space-y-6 hover:bg-white/10 hover:border-[#0A84FF]/50 transition-all group animate-slide-in" style={{animationDelay: '0.4s'}}>
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0A84FF] to-[#0066CC] flex items-center justify-center shadow-xl shadow-[#0A84FF]/30 group-hover:scale-110 transition-transform">
+                <Icon name="MousePointerClick" size={32} className="text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white">Real-Time Detection</h3>
-              <p className="text-white/70">
-                Instant cheat detection and ban system keeps your game clean without any delays or false positives.
-              </p>
-            </Card>
-
-            <Card className="bg-white/5 backdrop-blur border-white/10 p-8 space-y-4 hover:bg-white/10 transition-all animate-slide-in" style={{animationDelay: '0.5s'}}>
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#0284C7] flex items-center justify-center">
-                <Icon name="Settings" size={28} className="text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-white">Customizable Platform</h3>
-              <p className="text-white/70">
-                Flexible API and dashboard allow seamless integration with any game engine or platform.
+              <h3 className="text-2xl font-bold">Control</h3>
+              <p className="text-white/70 leading-relaxed">
+                Полный контроль над сессией с мгновенным откликом. Управляйте удалённым устройством как своим.
               </p>
             </Card>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="faq" className="container mx-auto px-6 py-20">
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-16 space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold text-white">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-xl text-white/60">
-                Everything you need to know about Ocean
-              </p>
-            </div>
-            <Accordion type="single" collapsible className="space-y-4">
-              <AccordionItem value="item-1" className="bg-white/5 backdrop-blur border-white/10 rounded-lg px-6">
-                <AccordionTrigger className="text-white hover:text-[#0EA5E9] text-lg">
-                  Why should you choose Ocean?
-                </AccordionTrigger>
-                <AccordionContent className="text-white/70 text-base">
-                  Ocean combines industry-leading detection rates with minimal performance impact. Our AI-powered system adapts to new cheats instantly, while our transparent reporting gives you complete visibility. With 24/7 support and regular updates, we're committed to keeping your game secure.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-2" className="bg-white/5 backdrop-blur border-white/10 rounded-lg px-6">
-                <AccordionTrigger className="text-white hover:text-[#0EA5E9] text-lg">
-                  What types of games does Ocean protect?
-                </AccordionTrigger>
-                <AccordionContent className="text-white/70 text-base">
-                  Ocean works with all major game engines including Unity, Unreal Engine, and custom engines. We support FPS, MOBA, Battle Royale, MMO, and strategy games across PC, console, and mobile platforms. Our flexible integration works with both competitive and casual games.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-3" className="bg-white/5 backdrop-blur border-white/10 rounded-lg px-6">
-                <AccordionTrigger className="text-white hover:text-[#0EA5E9] text-lg">
-                  How quickly can Ocean detect cheats?
-                </AccordionTrigger>
-                <AccordionContent className="text-white/70 text-base">
-                  Ocean operates in real-time with sub-5ms response times. Our system continuously monitors game sessions and instantly flags suspicious behavior. Most cheats are detected within seconds of activation, allowing for immediate action to protect fair gameplay.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-4" className="bg-white/5 backdrop-blur border-white/10 rounded-lg px-6">
-                <AccordionTrigger className="text-white hover:text-[#0EA5E9] text-lg">
-                  Will Ocean impact my game's performance?
-                </AccordionTrigger>
-                <AccordionContent className="text-white/70 text-base">
-                  No. Ocean is designed to be extremely lightweight, using less than 1% of system resources. Our optimized algorithms run efficiently in the background without affecting FPS, latency, or player experience. Most users won't even notice Ocean is running.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-5" className="bg-white/5 backdrop-blur border-white/10 rounded-lg px-6">
-                <AccordionTrigger className="text-white hover:text-[#0EA5E9] text-lg">
-                  How do I integrate Ocean into my game?
-                </AccordionTrigger>
-                <AccordionContent className="text-white/70 text-base">
-                  Integration is simple with our SDK and comprehensive documentation. Most developers complete basic integration in under an hour. We provide plugins for popular engines, REST APIs for custom solutions, and a dedicated support team to help with any technical questions.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </div>
-        </section>
-
-        <section id="contact" className="container mx-auto px-6 py-20">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h2 className="text-4xl md:text-5xl font-bold text-white">
-              Ready to Secure Your Game?
+      <section id="security" className="py-32 px-6 bg-gradient-to-b from-black to-[#0A0A0A]">
+        <div className="container mx-auto">
+          <div className="text-center mb-20 space-y-4">
+            <h2 className="text-5xl md:text-6xl font-bold">
+              A Reliable Solution<br />Against Cheaters
             </h2>
-            <p className="text-xl text-white/70">
-              Join thousands of game developers protecting their communities with Ocean
+            <p className="text-xl text-white/60 max-w-3xl mx-auto">
+              Комплексная защита вашей игровой среды от любых угроз
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-[#0EA5E9] to-[#0284C7] hover:from-[#0284C7] hover:to-[#0369A1] text-white text-lg px-8 py-6"
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {[
+              { icon: "ScanEye", title: "Cheater Tracing", desc: "Автоматическое отслеживание подозрительной активности игроков в реальном времени" },
+              { icon: "BrainCircuit", title: "AI Detection", desc: "Нейросетевой анализ паттернов поведения для выявления читов" },
+              { icon: "Headset", title: "Active Support", desc: "Круглосуточная техническая поддержка и помощь модераторам" },
+              { icon: "Users", title: "Big Community", desc: "Более 50,000 активных администраторов и модераторов" },
+              { icon: "BookOpen", title: "Documentation", desc: "Подробная документация и гайды по настройке системы" },
+              { icon: "Lock", title: "Secure Sessions", desc: "Защищённые сессии с шифрованием и контролем доступа" },
+            ].map((item, i) => (
+              <Card
+                key={i}
+                className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur border-white/10 p-8 space-y-4 hover:bg-white/10 hover:border-[#0A84FF]/30 transition-all animate-fade-in"
+                style={{animationDelay: `${i * 0.1}s`}}
               >
-                Get Started Free
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="border-white/20 text-white hover:bg-white/10 text-lg px-8 py-6"
-              >
-                Contact Sales
-              </Button>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-[#0A84FF]/10 flex items-center justify-center flex-shrink-0">
+                    <Icon name={item.icon as any} size={24} className="text-[#0A84FF]" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                    <p className="text-white/60 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="how" className="py-32 px-6 bg-gradient-to-b from-[#0A0A0A] to-black relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#0A84FF10_0%,_transparent_70%)]"></div>
+        
+        <div className="container mx-auto relative">
+          <div className="text-center mb-20 space-y-4">
+            <h2 className="text-5xl md:text-6xl font-bold">How Nexus Works</h2>
+            <p className="text-xl text-white/60 max-w-2xl mx-auto">
+              Простая настройка. Мгновенный результат. Полная безопасность.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+            <div className="text-center space-y-6 animate-fade-in">
+              <div className="w-24 h-24 mx-auto rounded-3xl bg-gradient-to-br from-[#0A84FF] to-[#0066CC] flex items-center justify-center shadow-2xl shadow-[#0A84FF]/40">
+                <Icon name="Download" size={40} className="text-white" />
+              </div>
+              <div className="space-y-3">
+                <div className="text-sm font-bold text-[#0A84FF] tracking-wider">STEP 1</div>
+                <h3 className="text-3xl font-bold">Downloading</h3>
+                <p className="text-white/70 leading-relaxed">
+                  Установите Nexus за 10 секунд. Лёгкий установщик без лишних вопросов.
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center space-y-6 animate-fade-in" style={{animationDelay: '0.2s'}}>
+              <div className="w-24 h-24 mx-auto rounded-3xl bg-gradient-to-br from-[#0A84FF] to-[#0066CC] flex items-center justify-center shadow-2xl shadow-[#0A84FF]/40">
+                <Icon name="Cable" size={40} className="text-white" />
+              </div>
+              <div className="space-y-3">
+                <div className="text-sm font-bold text-[#0A84FF] tracking-wider">STEP 2</div>
+                <h3 className="text-3xl font-bold">Connecting</h3>
+                <p className="text-white/70 leading-relaxed">
+                  Подключитесь одним кликом. Введите ID устройства или выберите из списка.
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center space-y-6 animate-fade-in" style={{animationDelay: '0.4s'}}>
+              <div className="w-24 h-24 mx-auto rounded-3xl bg-gradient-to-br from-[#FFB800] to-[#FF8C00] flex items-center justify-center shadow-2xl shadow-[#FFB800]/40">
+                <Icon name="ScanSearch" size={40} className="text-white" />
+              </div>
+              <div className="space-y-3">
+                <div className="text-sm font-bold text-[#FFB800] tracking-wider">STEP 3</div>
+                <h3 className="text-3xl font-bold">Scanning & Control</h3>
+                <p className="text-white/70 leading-relaxed">
+                  ИИ автоматически сканирует систему, вы получаете полный контроль.
+                </p>
+              </div>
             </div>
           </div>
-        </section>
-      </main>
 
-      <footer className="border-t border-white/10 bg-[#0A0F1C]/50 backdrop-blur mt-20">
-        <div className="container mx-auto px-6 py-12">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="mt-20 text-center">
+            <img
+              src="https://cdn.poehali.dev/projects/ee1051d3-7def-4477-ac4f-f6b174d4bafd/files/a1a1b69c-55aa-45de-99e7-b21d2aa39d75.jpg"
+              alt="Nexus Interface"
+              className="rounded-3xl border border-white/10 shadow-2xl max-w-4xl mx-auto"
+            />
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t border-white/10 bg-black/80 backdrop-blur py-16 px-6">
+        <div className="container mx-auto">
+          <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0EA5E9] to-[#0284C7] flex items-center justify-center">
-                  <Icon name="Shield" size={18} className="text-white" />
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0A84FF] to-[#0066CC] flex items-center justify-center shadow-lg shadow-[#0A84FF]/30">
+                  <Icon name="MonitorDot" size={22} className="text-white" />
                 </div>
-                <span className="text-xl font-bold text-white">Ocean</span>
+                <span className="text-2xl font-bold">Nexus</span>
               </div>
-              <p className="text-white/60 text-sm">
-                The most advanced anti-cheat solution for modern games.
+              <p className="text-white/60 text-sm leading-relaxed">
+                Most powerful remote control and anti-cheat monitoring tool.
               </p>
             </div>
+
             <div>
-              <h4 className="font-semibold text-white mb-4">Product</h4>
-              <ul className="space-y-2 text-white/60 text-sm">
-                <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">API</a></li>
+              <h4 className="font-bold mb-4">Product</h4>
+              <ul className="space-y-3 text-white/60 text-sm">
+                <li><a href="#" className="hover:text-[#0A84FF] transition-colors">Features</a></li>
+                <li><a href="#" className="hover:text-[#0A84FF] transition-colors">Security</a></li>
+                <li><a href="#" className="hover:text-[#0A84FF] transition-colors">Pricing</a></li>
+                <li><a href="#" className="hover:text-[#0A84FF] transition-colors">Download</a></li>
               </ul>
             </div>
+
             <div>
-              <h4 className="font-semibold text-white mb-4">Company</h4>
-              <ul className="space-y-2 text-white/60 text-sm">
-                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+              <h4 className="font-bold mb-4">Resources</h4>
+              <ul className="space-y-3 text-white/60 text-sm">
+                <li><a href="#" className="hover:text-[#0A84FF] transition-colors">Documentation</a></li>
+                <li><a href="#" className="hover:text-[#0A84FF] transition-colors">API Reference</a></li>
+                <li><a href="#" className="hover:text-[#0A84FF] transition-colors">Community</a></li>
+                <li><a href="#" className="hover:text-[#0A84FF] transition-colors">Support</a></li>
               </ul>
             </div>
+
             <div>
-              <h4 className="font-semibold text-white mb-4">Legal</h4>
-              <ul className="space-y-2 text-white/60 text-sm">
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Cookie Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">GDPR</a></li>
+              <h4 className="font-bold mb-4">Company</h4>
+              <ul className="space-y-3 text-white/60 text-sm">
+                <li><a href="#" className="hover:text-[#0A84FF] transition-colors">About</a></li>
+                <li><a href="#" className="hover:text-[#0A84FF] transition-colors">Blog</a></li>
+                <li><a href="#" className="hover:text-[#0A84FF] transition-colors">Careers</a></li>
+                <li><a href="#" className="hover:text-[#0A84FF] transition-colors">Contact</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-white/10 mt-12 pt-8 text-center text-white/60 text-sm">
-            © 2024 Ocean Anti-Cheat. All rights reserved.
+
+          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-white/50 text-sm">© 2025 Nexus. All rights reserved.</p>
+            <div className="flex items-center gap-4 text-sm text-white/50">
+              <button className="hover:text-white transition-colors">EN</button>
+              <span>/</span>
+              <button className="hover:text-white transition-colors">RU</button>
+            </div>
           </div>
         </div>
       </footer>
+
+      <Button
+        size="lg"
+        className="fixed bottom-8 right-8 bg-gradient-to-r from-[#0A84FF] to-[#0066CC] hover:from-[#0066CC] hover:to-[#0052A3] text-white shadow-2xl shadow-[#0A84FF]/50 animate-glow z-40"
+      >
+        <Icon name="Play" size={20} className="mr-2" />
+        Try Demo
+      </Button>
     </div>
   );
 };
